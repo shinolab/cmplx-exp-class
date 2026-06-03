@@ -1,0 +1,155 @@
+/* @theme biomeas */
+@import 'default';
+
+:root {
+  --ink: #22303a;
+  --accent: #202289;
+  --accent-dark: #161a6e;
+  --muted: #6b7780;
+  --bg: #ffffff;
+  --bg-soft: #f4f5f9;
+  --accent-bg: #eaebf7;
+}
+
+section {
+  font-family: 'BIZ UDPGothic', 'BIZ UDGothic', 'Hiragino Sans',
+    'Noto Sans CJK JP', sans-serif;
+  font-size: 26px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--bg);
+  padding: 54px 64px;
+}
+
+h1 {
+  font-size: 42px;
+  color: var(--accent-dark);
+  border-bottom: 4px solid var(--accent);
+  padding-bottom: 8px;
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  font-size: 32px;
+  color: var(--ink);
+}
+
+h3 {
+  font-size: 27px;
+  color: var(--accent-dark);
+}
+
+strong {
+  color: var(--accent-dark);
+}
+
+a {
+  color: var(--accent-dark);
+}
+
+ul,
+ol {
+  margin-left: 0.2em;
+}
+
+li {
+  margin: 0.22em 0;
+}
+
+table {
+  font-size: 22px;
+  border-collapse: collapse;
+}
+
+th {
+  background: var(--accent-bg);
+  color: var(--ink);
+}
+
+th,
+td {
+  border: 1px solid #d0d4e0;
+  padding: 6px 12px;
+}
+
+code {
+  background: var(--bg-soft);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+pre {
+  background: #0f1720;
+  border-radius: 8px;
+  padding: 14px 18px;
+}
+
+pre code {
+  background: transparent;
+  color: #e6edf3;
+  font-size: 0.8em;
+}
+
+section::after {
+  color: var(--muted);
+  font-size: 16px;
+}
+
+section.lead {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  color: #ffffff;
+  justify-content: center;
+  text-align: center;
+}
+
+section.lead h1 {
+  color: #ffffff;
+  border-bottom: none;
+  font-size: 50px;
+}
+
+section.lead h2 {
+  color: #eaebf7;
+  font-weight: 500;
+}
+
+section.lead h3 {
+  color: #d0d2f0;
+}
+
+section.lead strong {
+  color: #ffffff;
+}
+
+section.lead p,
+section.lead li {
+  color: #eaebf7;
+}
+
+blockquote {
+  border-left: 6px solid var(--accent);
+  background: var(--accent-bg);
+  padding: 10px 20px;
+  color: var(--ink);
+  font-size: 23px;
+}
+
+.cap,
+em.cap {
+  color: var(--muted);
+  font-size: 18px;
+  font-style: normal;
+}
+
+section.center {
+  justify-content: center;
+  text-align: center;
+}
+
+.cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5em;
+  align-items: start;
+}

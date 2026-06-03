@@ -1,0 +1,14 @@
+[project]
+name = "biomeasurement-course"
+version = "0.1.0"
+description = "生体計測グループ スライド用の図生成"
+requires-python = ">=3.11"
+dependencies = [
+    "matplotlib>=3.8",
+    "numpy>=1.26",
+    "scipy>=1.11",
+    "schemdraw>=0.19",
+]
+
+[tool.uv]
+package = false
