@@ -19,6 +19,7 @@ pdf: $(OUT)
 
 html: $(OUT)
 	$(MARP) slides/session1.md -o $(OUT)/session1.html $(MARPOPT)
+	cp -r slides/figures $(OUT)/figures
 
 watch:
 	$(MARP) -s slides $(MARPOPT)
