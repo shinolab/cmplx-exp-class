@@ -282,12 +282,26 @@ def fig_voltage_divider():
         return f"schemdraw unavailable: {e}"
     d = schemdraw.Drawing()
     d.config(unit=2.6)
+
     d += elm.Vdd().label("3.3 V")
     pot = elm.Potentiometer().down()
     d += pot
     d += elm.Ground()
-    d += elm.Line().right().at(pot.tap).length(2.6)
+    d += elm.Line().right().at(pot.tap).length(2.4)
     d += elm.Dot(open=True).label("→ ADC", loc="right")
+
+    d += elm.Label().at((1.1, -4.5)).label("$\\downarrow$", fontsize=26)
+
+    yb = -6.0
+    d += elm.Vdd().at((0, yb)).label("3.3 V")
+    r1 = elm.Resistor().down().label("$R_1$")
+    d += r1
+    r2 = elm.Resistor().down().label("$R_2$")
+    d += r2
+    d += elm.Ground()
+    d += elm.Line().right().at(r1.end).length(2.4)
+    d += elm.Dot(open=True).label("$V_{out}$ → ADC", loc="right")
+
     return _save_sd(d, "voltage_divider")
 
 
