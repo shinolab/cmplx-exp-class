@@ -423,22 +423,94 @@ def fig_phototransistor_frontend():
     d = schemdraw.Drawing()
     d.config(unit=2.2)
     d += elm.Vdd().label("3.3 V")
-    Q = elm.BjtNpn().anchor("collector").label("photo-\ntransistor", loc="left")
-    d += Q
-    for dy in (0.55, 0.0):                   
-        d += (elm.Arrow()
-              .at((Q.base[0] - 1.8, Q.base[1] + 1.1 + dy))
-              .to((Q.base[0] - 0.25, Q.base[1] + 0.25 + dy))
-              .color("#caa000"))
-    d += (node := elm.Line().down().at(Q.emitter).length(0.9).dot())
-    d += elm.Line().right().length(2.3).label("→ ADC (GP26)", loc="right")
+    # reverse-biased photodiode: cathode to V+, anode to load resistor
+    D = elm.Photodiode().down().reverse().label("photodiode")
+    d += D
+    d += (node := elm.Line().down().length(0.9).dot())
+    d += elm.Line().right().length(2.3).label("→ ADC", loc="right")
     d += elm.Dot(open=True)
     d += elm.Resistor().down().at(node.end).label("10 kΩ\n(load)")
     d += elm.Ground()
     return _save_sd(d, "phototransistor_frontend")
 
 
+def fig_breadboard():
+    from matplotlib.patches import Rectangle
+
+    fig, ax = plt.subplots(figsize=(10, 5.4))
+    ncol = 12
+    xs = np.arange(1, ncol + 1)
+
+    rail_top = [11.0, 10.4]                 # +, -
+    rows_top = [8.7, 8.2, 7.7, 7.2, 6.7]    # a-e
+    rows_bot = [5.3, 4.8, 4.3, 3.8, 3.3]    # f-j
+    rail_bot = [1.6, 1.0]                   # +, -
+
+    def holes(ylist, color=INK):
+        for y in ylist:
+            for x in xs:
+                ax.plot(x, y, "o", ms=7, mfc="white", mec=color, mew=1.2, zorder=3)
+
+    # terminal strips: each column of 5 holes is one connected group
+    for x in xs:
+        for ytop, ybot in [(rows_top[0], rows_top[-1]), (rows_bot[0], rows_bot[-1])]:
+            ax.add_patch(Rectangle((x - 0.32, ybot - 0.32), 0.64, ytop - ybot + 0.64,
+                                   facecolor=ACCENT, edgecolor="none", alpha=0.12, zorder=0))
+
+    # power rails: connected horizontally along the whole row
+    for y, c in [(rail_top[0], RED), (rail_top[1], INK),
+                 (rail_bot[0], RED), (rail_bot[1], INK)]:
+        ax.add_patch(Rectangle((0.6, y - 0.22), ncol - 0.2, 0.44,
+                               facecolor=c, edgecolor="none", alpha=0.12, zorder=0))
+        ax.plot([0.6, ncol + 0.4], [y, y], color=c, lw=1.4, alpha=0.5, zorder=1)
+
+    holes(rail_top, color=MUTED)
+    holes(rows_top)
+    holes(rows_bot)
+    holes(rail_bot, color=MUTED)
+
+    # rail +/- markers
+    for y in (rail_top[0], rail_bot[0]):
+        ax.text(0.2, y, "+", color=RED, fontsize=16, weight="bold", ha="center", va="center")
+    for y in (rail_top[1], rail_bot[1]):
+        ax.text(0.2, y, "−", color=INK, fontsize=16, weight="bold", ha="center", va="center")
+
+    # row letters
+    for y, lab in zip(rows_top + rows_bot, list("abcde") + list("fghij")):
+        ax.text(0.2, y, lab, color=MUTED, fontsize=11, ha="center", va="center")
+    # column numbers
+    for x in xs:
+        ax.text(x, 2.45, str(x), color=MUTED, fontsize=10, ha="center", va="center")
+
+    # annotations
+    cx = 4
+    ax.add_patch(Rectangle((cx - 0.36, rows_top[-1] - 0.36), 0.72,
+                           rows_top[0] - rows_top[-1] + 0.72,
+                           facecolor="none", edgecolor=ACCENT_D, lw=2.0, zorder=4))
+    ax.annotate("a column of 5 holes\nis connected (vertical)",
+                xy=(cx + 0.36, 7.7), xytext=(cx + 1.6, 9.4),
+                color=ACCENT_D, fontsize=12,
+                arrowprops=dict(arrowstyle="->", color=ACCENT_D, lw=1.5))
+    ax.annotate("power rail: connected\nalong the whole row",
+                xy=(8.5, rail_top[0]), xytext=(6.2, 12.0),
+                color=RED, fontsize=12,
+                arrowprops=dict(arrowstyle="->", color=RED, lw=1.5))
+    ax.annotate("center channel:\nseparates top &\nbottom halves",
+                xy=(11.5, 6.0), xytext=(13.0, 7.2),
+                color=INK, fontsize=12, ha="left", va="center",
+                arrowprops=dict(arrowstyle="->", color=INK, lw=1.5))
+    ax.plot([0.6, ncol + 0.4], [6.0, 6.0], color=MUTED, lw=1.0, ls=(0, (4, 3)), zorder=1)
+
+    ax.set_xlim(-0.4, 16.4)
+    ax.set_ylim(0.3, 12.6)
+    ax.set_aspect("equal")
+    ax.axis("off")
+    fig.tight_layout()
+    return _save(fig, "breadboard")
+
+
 FIGS = {
+    "breadboard": fig_breadboard,
     "ppg_dc_ac": fig_ppg_dc_ac,
     "ppg_cardiac": fig_ppg_cardiac,
     "absorption_spectra": fig_absorption_spectra,
