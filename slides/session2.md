@@ -245,8 +245,8 @@ LEDとフォトトランジスタを並べて配置し, その間に指を入れ
 
 ## MAX30102: PPG用の専用センサIC
 
-![bg right:46% fit](https://mds.analog.com/api/public/content/8874.png)
-
+<div class="cols">
+<div>
 1チップに統合されているもの: 
 
 - 赤・赤外 **LED**
@@ -254,6 +254,13 @@ LEDとフォトトランジスタを並べて配置し, その間に指を入れ
 - **アナログフィルタ+高精度ADC**
 - **デジタルフィルタ**
 - **I2C** 通信インタフェース
+</div>
+<div>
+
+![w:100% fit](https://mds.analog.com/api/public/content/8874.png)
+https://mds.analog.com/api/public/content/8874.png
+</div>
+</div>
 
 > 諸々のノイズ対策が, この1チップに入っている
 > 一個$1くらいで売ってる 
@@ -262,8 +269,11 @@ LEDとフォトトランジスタを並べて配置し, その間に指を入れ
 
 ## 動かしてみる (ライブラリ利用)
 
-[n-elia/MAX30102-MicroPython-driver](https://github.com/n-elia/MAX30102-MicroPython-driver)
-- インストールは手動でお願いします...
+[github:n-elia/MAX30102-MicroPython-driver](https://github.com/n-elia/MAX30102-MicroPython-driver)
+- "Install package via link"から上記を入力 
+
+<div class="cols">
+<div>
 
 ```python
 from machine import I2C, Pin
@@ -285,6 +295,14 @@ while True:
         red_reading = sensor.pop_red_from_storage()
         print(red_reading)
 ```
+
+</div>
+<div>
+
+![fit w:100%](figures/viperide_install_lib.png)
+
+</div>
+</div>
 
 ---
 
