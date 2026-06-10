@@ -231,10 +231,11 @@ sensor = ADC(Pin(<span class="hljs-number">26</span>))
 <h2 id="4-1">4</h2>
 <h1 id="%E5%B0%82%E7%94%A8ic-max30100max30102">専用IC: MAX30100/MAX30102</h1>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-paginate="true" data-theme="biomeas" lang="C" data-marpit-pagination="22" style="--paginate:true;--theme:biomeas;--marpit-advanced-background-split:46%;" data-marpit-pagination-total="31" data-size="16:9" data-marpit-advanced-background="background" data-marpit-advanced-background-split="right"><div data-marpit-advanced-background-container="true" data-marpit-advanced-background-direction="horizontal"><figure style="background-image:url(&quot;https://mds.analog.com/api/public/content/8874.png&quot;);background-size:contain;"></figure></div></section></foreignObject><foreignObject width="54%" height="720"><section id="22" data-paginate="true" data-theme="biomeas" lang="C" data-marpit-pagination="22" style="--paginate:true;--theme:biomeas;--marpit-advanced-background-split:46%;" data-marpit-pagination-total="31" data-size="16:9" data-marpit-advanced-background="content" data-marpit-advanced-background-split="right">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="22" data-paginate="true" data-theme="biomeas" lang="C" data-marpit-pagination="22" style="--paginate:true;--theme:biomeas;" data-marpit-pagination-total="31" data-size="16:9">
 <h2 id="max30102-ppg%E7%94%A8%E3%81%AE%E5%B0%82%E7%94%A8%E3%82%BB%E3%83%B3%E3%82%B5ic">MAX30102: PPG用の専用センサIC</h2>
-
-<p>1チップに統合されているもの:</p>
+<div class="cols">
+<div>
+1チップに統合されているもの: 
 <ul>
 <li>赤・赤外 <strong>LED</strong></li>
 <li><strong>フォトダイオード</strong> (受光)</li>
@@ -242,17 +243,25 @@ sensor = ADC(Pin(<span class="hljs-number">26</span>))
 <li><strong>デジタルフィルタ</strong></li>
 <li><strong>I2C</strong> 通信インタフェース</li>
 </ul>
+</div>
+<div>
+<p><img src="https://mds.analog.com/api/public/content/8874.png" alt="fit" /><br />
+<a href="https://mds.analog.com/api/public/content/8874.png">https://mds.analog.com/api/public/content/8874.png</a></p>
+</div>
+</div>
 <blockquote>
 <p>諸々のノイズ対策が, この1チップに入っている<br />
 一個$1くらいで売ってる</p>
 </blockquote>
 </section>
-</foreignObject><foreignObject width="1280" height="720" data-marpit-advanced-background="pseudo"><section data-paginate="true" data-theme="biomeas" lang="C" data-marpit-pagination="22" style="" data-marpit-pagination-total="31" data-size="16:9" data-marpit-advanced-background="pseudo" data-marpit-advanced-background-split="right"></section></foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="23" data-paginate="true" data-theme="biomeas" lang="C" data-marpit-pagination="23" style="--paginate:true;--theme:biomeas;" data-marpit-pagination-total="31" data-size="16:9">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="23" data-paginate="true" data-theme="biomeas" lang="C" data-marpit-pagination="23" style="--paginate:true;--theme:biomeas;" data-marpit-pagination-total="31" data-size="16:9">
 <h2 id="%E5%8B%95%E3%81%8B%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B-%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E5%88%A9%E7%94%A8">動かしてみる (ライブラリ利用)</h2>
-<p><a href="https://github.com/n-elia/MAX30102-MicroPython-driver">n-elia/MAX30102-MicroPython-driver</a></p>
+<p><a href="https://github.com/n-elia/MAX30102-MicroPython-driver">github:n-elia/MAX30102-MicroPython-driver</a></p>
 <ul>
-<li>インストールは手動でお願いします...</li>
+<li>&quot;Install package via link&quot;から上記を入力</li>
 </ul>
+<div class="cols">
+<div>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-keyword">from</span> machine <span class="hljs-keyword">import</span> I2C, Pin
 <span class="hljs-keyword">from</span> max30102 <span class="hljs-keyword">import</span> MAX30102, MAX30105_PULSE_AMP_MEDIUM
 
@@ -272,6 +281,11 @@ sensor.set_active_leds_amplitude(MAX30105_PULSE_AMP_MEDIUM)
         red_reading = sensor.pop_red_from_storage()
         <span class="hljs-built_in">print</span>(red_reading)
 </code></pre>
+</div>
+<div>
+<p><img src="figures/viperide_install_lib.png" alt="fit" /></p>
+</div>
+</div>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-paginate="true" data-theme="biomeas" lang="C" data-marpit-pagination="24" style="--paginate:true;--theme:biomeas;--marpit-advanced-background-split:42%;" data-marpit-pagination-total="31" data-size="16:9" data-marpit-advanced-background="background" data-marpit-advanced-background-split="right"><div data-marpit-advanced-background-container="true" data-marpit-advanced-background-direction="horizontal"><figure style="background-image:url(&quot;figures/i2c_timing.png&quot;);background-size:contain;"></figure></div></section></foreignObject><foreignObject width="58%" height="720"><section id="24" data-paginate="true" data-theme="biomeas" lang="C" data-marpit-pagination="24" style="--paginate:true;--theme:biomeas;--marpit-advanced-background-split:42%;" data-marpit-pagination-total="31" data-size="16:9" data-marpit-advanced-background="content" data-marpit-advanced-background-split="right">
 <h2 id="i2c-%E3%81%A3%E3%81%A6%E3%81%AA%E3%81%AB">I2C ってなに？</h2>
